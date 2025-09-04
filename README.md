@@ -1,131 +1,128 @@
+The-Lucky-Menu-🎮🕹️👾
+
 import random 
 
 
 def thePowerOfTwo(x):
-    if x>21: #if-sats som kontrollerar om vår input är större än 21
-        print("You have bypassed the maximum input-value (21) possible for this function!")
-        #begränsa outputet till 2^21 om villkoret är sant
+    if x > 21:  # if-condition that checks if input is greater than 21
+        print("You have bypassed the maximum input value (21) allowed for this function!")
+        # restrict output to 2^21 if condition is true
         for i in range(21):
             print(f"2^{i} = {2**i}")
     else:
         for i in range(x):
             print(f"2^{i} = {2**i}")
-    print("\n") #tom rad, så att det blir finare struktur i programmet
+    print("\n")  # empty line for nicer structure
     
 
-def tarningSpel(omgangar):
-    poang_1 = 0
-    poang_2 = 0
-    mina_kast= []  # Lista för att lagra mina kast
-    datorns_kast=[] # Lista för att lagra datorns kast
+def diceGame(rounds):
+    points_player = 0
+    points_computer = 0
+    my_rolls = []   # List to store player's rolls
+    comp_rolls = [] # List to store computer's rolls
 
-    for i in range(omgangar):
-        print(f"Omgång {i + 1} påbörjas..\n")
-        input("Tryck på Enter för att kasta tärningen!")
-        slumptal_1 = random.randint(1, 6)
-        mina_kast.append(slumptal_1)
-        print(f"Du fick {slumptal_1}\n")
-        input("Motståndarens tur, tryck på Enter för att fortsätta!")
-        slumptal_2 = random.randint(1, 6)
-        datorns_kast.append(slumptal_2)
-        print(f"Motståndaren fick {slumptal_2}\n")
+    for i in range(rounds):
+        print(f"Round {i + 1} begins..\n")
+        input("Press Enter to roll the dice!")
+        roll_1 = random.randint(1, 6)
+        my_rolls.append(roll_1)
+        print(f"You rolled {roll_1}\n")
+        input("Opponent's turn, press Enter to continue!")
+        roll_2 = random.randint(1, 6)
+        comp_rolls.append(roll_2)
+        print(f"Opponent rolled {roll_2}\n")
 
-        if slumptal_1 > slumptal_2:
-            print("Du vann omgången!")
-            poang_1 += 1
-            print(f"Poäng efter denna omgång är {poang_1}-{poang_2} (Du vs Motståndare)")
-        elif slumptal_1 < slumptal_2:
-            print("Du förlorade omgången!")
-            poang_2 += 1
-            print(f"Poäng efter denna omgång är {poang_1}-{poang_2} (Du vs Motståndare)")
+        if roll_1 > roll_2:
+            print("You won this round!")
+            points_player += 1
+            print(f"Score after this round: {points_player}-{points_computer} (You vs Opponent)")
+        elif roll_1 < roll_2:
+            print("You lost this round!")
+            points_computer += 1
+            print(f"Score after this round: {points_player}-{points_computer} (You vs Opponent)")
         else:
-            print("Den här omgången är oavgjord!")
-            print(f"Poäng efter denna omgång är {poang_1}-{poang_2} (Du vs Motståndare)")
+            print("This round is a draw!")
+            print(f"Score after this round: {points_player}-{points_computer} (You vs Opponent)")
 
         print("\n")
-    print(f"Slutpoäng är {poang_1}-{poang_2} (Du vs Motståndare)")
-    if poang_1 > poang_2:
-        print("Grattis! Du vann spelet!")
-    elif poang_1 < poang_2:
-        print("Tyvärr förlorade du spelet. Motståndaren är segrare!")
+    print(f"Final score: {points_player}-{points_computer} (You vs Opponent)")
+    if points_player > points_computer:
+        print("Congratulations! You won the game!")
+    elif points_player < points_computer:
+        print("Unfortunately, you lost. The opponent wins!")
     else:
-        print("Spelet slutade oavgjort!")
+        print("The game ended in a draw!")
 
-    # Beräkna och skriv ut statistik
-    medel_kast_1= round(sum(mina_kast) / len(mina_kast), 1) #beräkning av medelvärde
-    medel_kast_2= round(sum(datorns_kast) / len(datorns_kast), 1)
-    lagsta_kast_1=min(mina_kast)
-    lagsta_kast_2=min(datorns_kast)
-    hogsta_kast_1=max(mina_kast)
-    hogsta_kast_2=max(datorns_kast)
-    print(f"\nMedelvärdet av dina kast under alla omgångar: {medel_kast_1}")
-    print(f"Medelvärdet av motståndarens kast under alla omgångar: {medel_kast_2} \n")
-    print(f"Ditt lägsta kast under någon omgång: {lagsta_kast_1} ")
-    print(f"Motståndarens lägsta kast under någon omgång: {lagsta_kast_2} \n")
-    print(f"Ditt högsta kast under någon omgång: {hogsta_kast_1}")
-    print(f"Motståndarens högsta kast under någon omgång: {hogsta_kast_2}\n")
-
-
+    # Calculate and print statistics
+    avg_roll_player = round(sum(my_rolls) / len(my_rolls), 1)
+    avg_roll_comp = round(sum(comp_rolls) / len(comp_rolls), 1)
+    min_roll_player = min(my_rolls)
+    min_roll_comp = min(comp_rolls)
+    max_roll_player = max(my_rolls)
+    max_roll_comp = max(comp_rolls)
+    print(f"\nYour average roll: {avg_roll_player}")
+    print(f"Opponent's average roll: {avg_roll_comp} \n")
+    print(f"Your lowest roll: {min_roll_player}")
+    print(f"Opponent's lowest roll: {min_roll_comp} \n")
+    print(f"Your highest roll: {max_roll_player}")
+    print(f"Opponent's highest roll: {max_roll_comp}\n")
 
 
 
-def gissaSlumptal():
-    mindre_sju=0 #boolean-variabel som visar om det tog <=7 forsök eller inte
-    antal_forsok = 0
-    slumpat_tal = random.randint(1, 100)
+def guessRandomNumber():
+    under_seven = 0  # boolean-like variable to show if it took <=7 attempts
+    attempts = 0
+    random_number = random.randint(1, 100)
     
     while True:
-        anvandarens_gissning = int(input("Gissa ett tal mellan 1 och 100: "))
-        antal_forsok += 1
+        user_guess = int(input("Guess a number between 1 and 100: "))
+        attempts += 1
         
-        if anvandarens_gissning == slumpat_tal:
-            print(f"Du gissade rätt på {antal_forsok} försök.")
-            if antal_forsok<=7:
-                print("Bra jobbat!")
-                mindre_sju=1
+        if user_guess == random_number:
+            print(f"You guessed correctly in {attempts} attempts.")
+            if attempts <= 7:
+                print("Well done!")
+                under_seven = 1
             else:    
-                print("Så många försök borde det inte ta, försök igen.")
-            return mindre_sju
-        elif anvandarens_gissning < slumpat_tal:
-            print("För lågt! Försök igen.")
+                print("That took too many attempts, try again.")
+            return under_seven
+        elif user_guess < random_number:
+            print("Too low! Try again.")
         else:
-            print("För högt! Försök igen.")
+            print("Too high! Try again.")
         
-        
 
 
 
-cons_wins=0 # Variabel för att hålla koll på antalet rätt gissningar i rad
+consecutive_wins = 0  # Variable to keep track of consecutive successful guesses
 while True:
     print("1. thePowerOfTwo()")
-    print("2. tarningSpel()")
-    print("3. gissaSlumptal()")
+    print("2. diceGame()")
+    print("3. guessRandomNumber()")
     print("4. Close the menu")
-    inp=int(input("Välj nogåt av de fyra allternativen  (1 -> 4): "))
+    inp = int(input("Choose one of the four options (1 -> 4): "))
 
    
-    if inp==1:
-        inp1=int(input("Skriv in ett input för att funkrionen ska starta : "))
+    if inp == 1:
+        inp1 = int(input("Enter an input for the function to start: "))
         print("\n")
         thePowerOfTwo(inp1)
     
-    if inp==2:
-        inp2=int(input("Hur många gånger vill du spela? skriv in ett input:"))
+    if inp == 2:
+        inp2 = int(input("How many rounds do you want to play? Enter a number: "))
         print("\n")
-        tarningSpel(inp2)
+        diceGame(inp2)
      
+    if inp == 3:
+        print("\n")
+        play = guessRandomNumber()  # =1 if it took <=7 guesses, otherwise =0
+        if play:
+            consecutive_wins += 1
+        else:
+            consecutive_wins = 0
 
-    if inp==3:
-       print("\n")
-       spela=gissaSlumptal() # =1 om det tog <=7 gissningar, annars =0
-       if spela: #om sant (spela=1)
-           cons_wins+=1 #vi adderar 1 till cons_wins varje gång vi klarar spelet på <=7 gissningar
-       else: #om spela=0
-           cons_wins=0 #nollställ om det någon gång tar >7 gissningar
-
-       if cons_wins>=3: #klarar vi spelet 3 eller flera gånger i rad med <=7 gissningar
-          print("Du använder bevisligen en bra gissningsstrategi!")    
+        if consecutive_wins >= 3:
+            print("You clearly have a good guessing strategy!")    
           
-    if inp==4:
+    if inp == 4:
         break
-    
