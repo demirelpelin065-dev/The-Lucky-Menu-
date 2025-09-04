@@ -1,8 +1,6 @@
-# The-Lucky-Menu-
-The Lucky Menu ⭐  Description
-
-
 import random 
+
+
 def thePowerOfTwo(x):
     if x>21: #if-sats som kontrollerar om vår input är större än 21
         print("You have bypassed the maximum input-value (21) possible for this function!")
